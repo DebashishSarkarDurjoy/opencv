@@ -1,12 +1,20 @@
 import cv2
+import numpy as np
 
-cap = cv2.VideoCapture(0)
-cap.set(3, 340)
-cap.set(4, 560)
+path = "kiara.png"
+img = cv2.imread(path)
 
-while True:
-    success, img = cap.read()
-    cv2.imshow("Web Cam", img)
+kernel = np.ones((5,5), np.uint8)
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+imgBlur = cv2.GaussianBlur(imgGray, (7,7), 0)
+imgCanny = cv2.Canny(img, 150, 200)
+imgDialiation = cv2.dilate(imgCanny, kernel, iterations = 1)
+imgEroded = cv2.erode(imgDialiation, kernel, iterations = 1)
+
+cv2.imshow("Gray Image", imgGray)
+cv2.imshow("Blur Image", imgBlur)
+cv2.imshow("Dialiation Image", imgDialiation)
+cv2.imshow("Eroded Image", imgEroded)
+
+cv2.waitKey(0)
