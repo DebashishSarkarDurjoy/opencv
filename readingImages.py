@@ -1,12 +1,8 @@
 import cv2
 
-cap = cv2.VideoCapture(0)
-cap.set(3, 340)
-cap.set(4, 560)
+path = "Resources/kiara.png"
 
-while True:
-    success, img = cap.read()
-    cv2.imshow("Web Cam", img)
+kiara = cv2.imread(path)
+cv2.imshow("Naked Kiara", kiara)
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+cv2.waitKey(0)
