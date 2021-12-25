@@ -1,12 +1,14 @@
 import cv2
 
-cap = cv2.VideoCapture(0)
-cap.set(3, 340)
-cap.set(4, 560)
+img = cv2.imread("kiara.png")
 
-while True:
-    success, img = cap.read()
-    cv2.imshow("Web Cam", img)
+print(img.shape)
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+imgResize = cv2.resize(img, (700, 350))
+imgCropped = img[0:650, 150:250]
+
+cv2.imshow("Original", img)
+cv2.imshow("Resized", imgResize)
+cv2.imshow("Cropped", imgCropped)
+
+cv2.waitKey(0)
